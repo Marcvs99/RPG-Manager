@@ -1811,6 +1811,62 @@ int Character::getWoundLevel()
 	return woundLevel;
 }
 
+int Character::getWoundLevel(bodyPrt bp)
+{
+	switch (bp)
+	{
+		case:: bodyPrt::all:
+		{
+			return woundLevel;
+			break;
+		}
+		case::bodyPrt::head:
+		{
+			return head.woundLevel;
+			break;
+		}
+		case::bodyPrt::neck:
+		{
+			return neck.woundLevel;
+			break;
+		}
+		case::bodyPrt::rightArm:
+		{
+			return rightArm.woundLevel;
+			break;
+		}
+		case::bodyPrt::leftArm:
+		{
+			return leftArm.woundLevel;
+			break;
+		}
+		case::bodyPrt::chest:
+		{
+			return chest.woundLevel;
+			break;
+		}
+		case::bodyPrt::gut:
+		{
+			return gut.woundLevel;
+			break;
+		}
+		case::bodyPrt::rightLeg:
+		{
+			return rightLeg.woundLevel;
+			break;
+		}
+		case::bodyPrt::leftLeg:
+		{
+			return leftLeg.woundLevel;
+			break;
+		}
+		default:
+		{
+			return woundLevel;
+		}
+	}
+}
+
 int Character::getResistance(damageType dt)
 {
 	switch (dt)

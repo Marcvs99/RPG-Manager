@@ -205,12 +205,95 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 {
 	int escapeCode = 0;
 
+	std::cout << '\n';
+
 	if (args.size() > 0)
 	{
 		if (args[0] == "commands")
 		{
 			//display list of commands
-			std::cout << "Displaying commands: " << '\n';
+			std::cout << "Displaying commands" << '\n' << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << std::left << "gameinfo" << "display info about the roleplay system and the program" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "endturn" << "ends current character's turn when in combat" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "endcombat" << "ends current combat encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "endprogram" << "exits the program" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "armor/new" << "create new armor type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "armor/delete" << "delete an armor type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "armor/display" << "display all armor types" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "armor/display/[name]" << "display specified armor type" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "weapon/new" << "create new weapon type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "weapon/delete" << "delete an weapon type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "weapon/display" << "display all weapon types" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "weapon/display/[name]" << "display specified weapon type" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "npc/new" << "create new npc type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "npc/delete" << "delete an npc type" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "npc/display" << "display all npc types" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "npc/display/[name]" << "display specified npc type" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "character/new" << "create new character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "character/delete" << "delete a character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "character/display" << "display all characters" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "character/display/[name]" << "display specified character" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/new" << "specify new encounter to save to file" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/delete" << "delete a saved encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/display" << "display all saved encounters" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/load" << "load a saved encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/clear" << "clear all characters/npcs from current encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "encounter/displaycharacters" << "display all characters/npcs from current encounter" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/newdeck" << "create new event deck" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/deletedeck" << "delete an event deck" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/[deckname]/newevent" << "create new event in specified deck" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/[deckname]/deleteevent" << "delete an event in specified deck" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/[deckname]/seelist" << "display list of events in specified deck and choose one to display full details of" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "event/[deckname]/seelist" << "display random event from specified deck" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "edit/[charactername]/resistances" << "edit the specified character's resistances" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "edit/[charactername]/armor" << "edit the specified character's armor" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "edit/[charactername]/skills" << "edit the specified character's skills" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "edit/[charactername]/ammo" << "edit the specified character's ammo" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "edit/[charactername]/weapons" << "edit the specified character's weapons" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "combat" << "initiate combat with current encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "combat/[encountername]" << "initiate combat with specified encounter" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "kill" << "displays current characters in encounter and knocks selected character out (will be skipped in combat but can still be interacted with)" << '\n';
+			std::cout << "NOTE: if in the combat helper, this command will automatically specify character who's turn it is unless otherwise specified" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "kill/[charactername]" << "knocks specified character out (will be skipped in combat but can still be interacted with)" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "revive" << "displays current characters in encounter and revives selected character (will not be skipped in combat)" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "revive/[charactername]" << "revives specified character (will not be skipped in combat)" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "activate/npc" << "displays npc types and adds specified amount of user selection to current encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "activate/character" << "displays characters and adds specified character to current encounter" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "remove" << "displays characters in current encounter and removes specified character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "remove/[charactername]" << "removes specified character from current encounter" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "rollskill" << "displays characters in current encounter and rolls selected skill for selected character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "rollskill/[charactername]" << "rolls selected skill for specified character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "rollskill/[charactername]/[skill]" << "rolls specified skill for specified character" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "attack" << "displays characters in current encounter and resolves attack between two selected characters" << '\n';
+			std::cout << "NOTE: if in the combat helper, this command will automatically specify character who's turn it is unless otherwise specified" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "attack/[attackername]" << "resolves attack between specified character and annother selected from current encounter" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "attack/[attackername]/[defendername]" << "resolves attack between specified characters" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "heal" << "displays characters in current encounter and restores health to selected body part" << '\n';
+			std::cout << "NOTE: if in the combat helper, this command will automatically specify character who's turn it is unless otherwise specified" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "heal/[charactername]" << "heals specified character and selected body part" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "heal/[charactername]/[bodypart]" << "heals specified character and specified body part" << '\n';
+			std::cout << "NOTE: body parts are: 'head' 'neck' 'rightarm' leftarm' 'chest' 'gut' 'rightleg' leftleg'" << '\n';
+			std::cout << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "reload" << "displays characters in current encounter and restores ammo to selected weapon" << '\n';
+			std::cout << "NOTE: if in the combat helper, this command will automatically specify character who's turn it is unless otherwise specified" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "reload/[charactername]" << "restores ammo to selected weapon of specified character" << '\n';
+			std::cout << std::setfill('.') << std::setw(40) << "reload/[charactername]/[weaponname]" << "restores ammo to specified weapon of specified character" << '\n';
+			std::cout << '\n';
 		}
 		else if (args[0] == "gameinfo")
 		{
@@ -513,6 +596,14 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 					combatants.clear();
 					currentEncounter = "none";
 				}
+				else if (args[1] == "displaycharacters")
+				{
+					//display all combatants
+					for (int i = 0; i < combatants.size(); i++)
+					{
+						std::cout << combatants[i].getName() << '\n';
+					}
+				}
 			}
 			else
 			{
@@ -564,22 +655,293 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				if (args[2] == "resistances")
 				{
 					// search character vector for args[1], then allow user to edit resistances, then save changes to character vector and file
+					int test = vectorLookup(playerCharacters, args[1], 0, playerCharacters.size() - 1);
+					if (test > -1)
+					{
+						playerCharacters[test].setResistances();
+					}
+					else
+					{
+						test = vectorLookup(NPCs, args[1], 0, NPCs.size() - 1);
+						if (test > -1)
+						{
+							NPCs[test].setResistances();
+						}
+						else
+						{
+							std::cout << "Error: character not found" << '\n';
+						}
+					}
 				}
 				else if (args[2] == "armor")
 				{
 					// search character vector for args[1], then allow user to edit armor, then save changes to character vector and file
+					int test = vectorLookup(playerCharacters, args[1], 0, playerCharacters.size() - 1);
+					if (test > -1)
+					{
+						playerCharacters[test].setArmor(armor);
+					}
+					else
+					{
+						test = vectorLookup(NPCs, args[1], 0, NPCs.size() - 1);
+						if (test > -1)
+						{
+							NPCs[test].setArmor(armor);
+						}
+						else
+						{
+							std::cout << "Error: character not found" << '\n';
+						}
+					}
 				}
 				else if (args[2] == "skills")
 				{
 					// search character vector for args[1], then allow user to edit skills, then save changes to character vector and file
+					int test = vectorLookup(playerCharacters, args[1], 0, playerCharacters.size() - 1);
+					if (test > -1)
+					{
+						playerCharacters[test].changeSkills();
+					}
+					else
+					{
+						test = vectorLookup(NPCs, args[1], 0, NPCs.size() - 1);
+						if (test > -1)
+						{
+							NPCs[test].changeSkills();
+						}
+						else
+						{
+							std::cout << "Error: character not found" << '\n';
+						}
+					}
 				}
 				else if (args[2] == "ammo")
 				{
 					// search character vector for args[1], then allow user to edit (spare) ammo, then save changes to character vector and file
+					int test = vectorLookup(playerCharacters, args[1], 0, playerCharacters.size() - 1);
+					if (test > -1)
+					{
+						playerCharacters[test].setSpareAmmo();
+					}
+					else
+					{
+						test = vectorLookup(NPCs, args[1], 0, NPCs.size() - 1);
+						if (test > -1)
+						{
+							NPCs[test].setSpareAmmo();
+						}
+						else
+						{
+							std::cout << "Error: character not found" << '\n';
+						}
+					}
 				}
 				else if (args[2] == "weapons")
 				{
 					// search character vector for args[1], then allow user to edit weapons, then save changes to character vector and file
+					int test = vectorLookup(playerCharacters, args[1], 0, playerCharacters.size() - 1);
+					if (test > -1)
+					{
+						std::cout << "Choose weapon to replace" << '\n';
+						int num = 1;
+						
+						std::cout << "0. None" << '\n';
+						std::cout << "1. " << playerCharacters[test].w1.getName() << '\n';
+						if (playerCharacters[test].w2.getName() != "")
+						{
+							std::cout << "2. " << playerCharacters[test].w2.getName() << '\n';
+							if (playerCharacters[test].w3.getName() != "")
+							{
+								std::cout << "3. " << playerCharacters[test].w3.getName() << '\n';
+								if (playerCharacters[test].w4.getName() != "")
+								{
+									std::cout << "4. " << playerCharacters[test].w4.getName() << '\n';
+									std::cout << "5. " << playerCharacters[test].w5.getName() << '\n';
+									num = 5;
+								}
+								else
+								{
+									std::cout << "4. " << playerCharacters[test].w2.getName() << '\n';
+									num = 4;
+								}
+								
+							}
+							else
+							{
+								std::cout << "3. " << playerCharacters[test].w2.getName() << '\n';
+								num = 3;
+							}
+							
+						}
+						else
+						{
+							std::cout << "2. " << playerCharacters[test].w2.getName() << '\n';
+							num = 2;
+						}
+						
+
+						int response = getIntInput();
+
+						if (response < 0 || response > num)
+						{
+							std::cout << "Invalid Input" << '\n';
+							response = getIntInput();
+						}
+
+						if (response > 0)
+						{
+							std::cout << "Choose weapon to replace selected weapon" << '\n';
+							for (int i = 0; i < weapons.size(); i++)
+							{
+								std::cout << i + 1 << ". " << weapons[i].getName() << '\n';
+							}
+
+							int response2 = getIntInput();
+
+							if (response2 < 1 || response > weapons.size())
+							{
+								std::cout << "Invalid Input" << '\n';
+								response2 = getIntInput();
+							}
+
+							Weapon temp = weapons[response2 - 1];
+
+							switch (response)
+							{
+								case 1:
+								{
+									playerCharacters[test].w1 = temp;
+									break;
+								}
+								case 2:
+								{
+									playerCharacters[test].w2 = temp;
+									break;
+								}
+								case 3:
+								{
+									playerCharacters[test].w3 = temp;
+									break;
+								}
+								case 4:
+								{
+									playerCharacters[test].w4 = temp;
+									break;
+								}
+								case 5:
+								{
+									playerCharacters[test].w5 = temp;
+									break;
+								}
+							}
+						}
+						
+					}
+					else
+					{
+						test = vectorLookup(NPCs, args[1], 0, NPCs.size() - 1);
+						if (test > -1)
+						{
+							std::cout << "Choose weapon to replace" << '\n';
+							int num = 1;
+
+							std::cout << "0. None" << '\n';
+							std::cout << "1. " << NPCs[test].w1.getName() << '\n';
+							if (NPCs[test].w2.getName() != "")
+							{
+								std::cout << "2. " << NPCs[test].w2.getName() << '\n';
+								if (NPCs[test].w3.getName() != "")
+								{
+									std::cout << "3. " << NPCs[test].w3.getName() << '\n';
+									if (NPCs[test].w4.getName() != "")
+									{
+										std::cout << "4. " << NPCs[test].w4.getName() << '\n';
+										std::cout << "5. " << NPCs[test].w5.getName() << '\n';
+										num = 5;
+									}
+									else
+									{
+										std::cout << "4. " << NPCs[test].w2.getName() << '\n';
+										num = 4;
+									}
+
+								}
+								else
+								{
+									std::cout << "3. " << NPCs[test].w2.getName() << '\n';
+									num = 3;
+								}
+
+							}
+							else
+							{
+								std::cout << "2. " << NPCs[test].w2.getName() << '\n';
+								num = 2;
+							}
+
+
+							int response = getIntInput();
+
+							if (response < 0 || response > num)
+							{
+								std::cout << "Invalid Input" << '\n';
+								response = getIntInput();
+							}
+
+							if (response > 0)
+							{
+								std::cout << "Choose weapon to replace selected weapon" << '\n';
+								for (int i = 0; i < weapons.size(); i++)
+								{
+									std::cout << i + 1 << ". " << weapons[i].getName() << '\n';
+								}
+
+								int response2 = getIntInput();
+
+								if (response2 < 1 || response > weapons.size())
+								{
+									std::cout << "Invalid Input" << '\n';
+									response2 = getIntInput();
+								}
+
+								Weapon temp = weapons[response2 - 1];
+
+								switch (response)
+								{
+								case 1:
+								{
+									NPCs[test].w1 = temp;
+									break;
+								}
+								case 2:
+								{
+									NPCs[test].w2 = temp;
+									break;
+								}
+								case 3:
+								{
+									NPCs[test].w3 = temp;
+									break;
+								}
+								case 4:
+								{
+									NPCs[test].w4 = temp;
+									break;
+								}
+								case 5:
+								{
+									NPCs[test].w5 = temp;
+									break;
+								}
+								}
+							}
+
+						}
+						else
+						{
+							std::cout << "Error: character not found" << '\n';
+						}
+					}
 				}
 				else
 				{
@@ -591,12 +953,16 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				std::cout << "Error: Not enough arguments" << '\n';
 			}
 		}
-		else if (args[0] == "combat")
+		else if (args[0] == "combat" && combatants.size() > 0)
 		{
 			if (args.size() < 2)
 			{
 				// launch combat
 				escapeCode = combatEncounter(args, playerCharacters, NPCs, combatants, weapons, armor, encounters, currentEncounter);
+			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
 			}
 			else
 			{
@@ -616,7 +982,7 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 		}
 		else if (args[0] == "kill")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 0)
 			{
 				// display combatants and set user selection.alive to false
 				std::cout << "Select character to remove from combat (will be skipped in combat until revived)" << '\n';
@@ -633,6 +999,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				}
 				combatants[response - 1].knockOut();
 			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
+			}
 			else
 			{
 				// set combatant matching args[1] alive to false
@@ -641,11 +1011,15 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				{
 					combatants[test].knockOut();
 				}
+				else
+				{
+					std::cout << "Combatant not found" << '\n';
+				}
 			}
 		}
 		else if (args[0] == "revive")
 		{
-		if (args.size() < 2)
+		if (args.size() < 2 && combatants.size() > 0)
 		{
 			// display combatants and set user selection.alive to true
 			std::cout << "Select character to revive" << '\n';
@@ -662,6 +1036,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 			}
 			combatants[response - 1].revive();
 		}
+		else if (combatants.size() < 1)
+		{
+			std::cout << "Error: no characters are loaded in current encounter" << '\n';
+		}
 		else
 		{
 			// set combatant matching args[1] alive to true
@@ -669,6 +1047,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 			if (test != -1)
 			{
 				combatants[test].revive();
+			}
+			else
+			{
+				std::cout << "Combatant not found" << '\n';
 			}
 		}
 		}
@@ -700,14 +1082,6 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 						combatants.push_back(playerCharacters[response - 1]);
 					}
 				}
-				else if (args[1] == "display")
-				{
-					//display all combatants
-					for (int i = 0; i < combatants.size(); i++)
-					{
-						std::cout << combatants[i].getName() << '\n';
-					}
-				}
 			}
 			else
 			{
@@ -716,7 +1090,7 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 		}
 		else if (args[0] == "remove")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 0)
 			{
 				//display combatants and remove user selection from vector
 				std::cout << "Select character to remove from encounter:" << '\n';
@@ -736,6 +1110,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 					combatants.erase(combatants.begin() + (response - 1));
 				}
 			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
+			}
 			else
 			{
 				// remove combatant matching args[1]
@@ -744,11 +1122,15 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				{
 					combatants.erase(combatants.begin() + test);
 				}
+				else
+				{
+					std::cout << "Combatant not found" << '\n';
+				}
 			}
 		}
 		else if (args[0] == "rollskill")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 0)
 			{
 				// display all combatants, get user selection, call rollskill method
 				std::cout << "Select character to roll skill:" << '\n';
@@ -768,6 +1150,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 					combatants[response - 1].rollSkill(combatants);
 				}
 			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
+			}
 			else if (args.size() < 3)
 			{
 				// call rollskill method for character matching args[1]
@@ -775,6 +1161,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				if (test != -1)
 				{
 					combatants[test].rollSkill(combatants);
+				}
+				else
+				{
+					std::cout << "Combatant not found" << '\n';
 				}
 			}
 			else
@@ -788,13 +1178,21 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 					{
 						combatants[test].rollSkill(s, combatants);
 					}
+					else
+					{
+						std::cout << "Error: Unkown Skill" << '\n';
+					}
 					
+				}
+				else
+				{
+					std::cout << "Combatant not found" << '\n';
 				}
 			}
 		}
 		else if (args[0] == "attack")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 1)
 			{
 				// display all combatants, get user selection for attacker, get user selection for defender, call attackDefend function
 				int attacker = -1;
@@ -825,6 +1223,10 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				}
 				defender = response;
 				attackDefend(combatants[attacker], combatants[defender]);
+			}
+			else if (combatants.size() < 2)
+			{
+				std::cout << "Error: not enough characters loaded in current encounter" << '\n';
 			}
 			else if (args.size() < 3)
 			{
@@ -872,32 +1274,412 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 		}
 		else if (args[0] == "heal")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 0)
 			{
 				// display all combatants, get user selection for character to heal, get user selection for body part, change wound level
+				std::cout << "select combatant to heal:" << '\n';
+				for (int i = 0; i < combatants.size(); i++)
+				{
+					std::cout << i + 1 << ". " << combatants[i].getName() << '\n';
+				}
+
+				int response = getIntInput();
+				while (response < 1 || response > combatants.size())
+				{
+					std::cout << "Invalid Input" << '\n';
+					response = getIntInput();
+				}
+
+				std::cout << "select body part to heal:" << '\n';
+				std::cout << "1. All/General Wound Level (" << combatants[response - 1].getWoundLevel() << '\n';
+				std::cout << "2. Head (" << combatants[response - 1].getWoundLevel(bodyPrt::head) << '\n';
+				std::cout << "3. Neck (" << combatants[response - 1].getWoundLevel(bodyPrt::neck) << '\n';
+				std::cout << "4. Right Arm (" << combatants[response - 1].getWoundLevel(bodyPrt::rightArm) << '\n';
+				std::cout << "5. Left Arm (" << combatants[response - 1].getWoundLevel(bodyPrt::leftArm) << '\n';
+				std::cout << "6. Chest (" << combatants[response - 1].getWoundLevel(bodyPrt::chest) << '\n';
+				std::cout << "7. Gut (" << combatants[response - 1].getWoundLevel(bodyPrt::gut) << '\n';
+				std::cout << "8. Right Leg (" << combatants[response - 1].getWoundLevel(bodyPrt::rightLeg) << '\n';
+				std::cout << "9. Left Leg (" << combatants[response - 1].getWoundLevel(bodyPrt::leftLeg) << '\n';
+
+				int response2 = getIntInput();
+				while (response2 < 0 || response2 > 9)
+				{
+					std::cout << "Invalid Input" << '\n';
+					response2 = getIntInput();
+				}
+
+				if (response2 == 1)
+				{
+					response2 = 10;
+				}
+
+				std::cout << "Enter amount to heal (will subtract from wound level)" << '\n';
+
+				int response3 = getIntInput();
+				while (response3 > combatants[response - 1].getWoundLevel(static_cast<bodyPrt>(response2 - 2)))
+				{
+					response3 = combatants[response - 1].getWoundLevel(static_cast<bodyPrt>(response2 - 2));
+				}
+
+				if (response3 > 0)
+				{
+					int newLevel = combatants[response - 1].getWoundLevel(static_cast<bodyPrt>(response2 - 2)) - response3;
+					combatants[response - 1].heal(static_cast<bodyPrt>(response2 - 2), newLevel);
+				}
+				
+			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
 			}
 			else if (args.size() < 3)
 			{
 				// find combatant matching arg[1], get user selection for body part, change wound level
+				int test = unsortedLookup(combatants, args[1]);
+				if (test > -1)
+				{
+					std::cout << "select body part to heal:" << '\n';
+					std::cout << "1. All/General Wound Level (" << combatants[test].getWoundLevel() << '\n';
+					std::cout << "2. Head (" << combatants[test].getWoundLevel(bodyPrt::head) << '\n';
+					std::cout << "3. Neck (" << combatants[test].getWoundLevel(bodyPrt::neck) << '\n';
+					std::cout << "4. Right Arm (" << combatants[test].getWoundLevel(bodyPrt::rightArm) << '\n';
+					std::cout << "5. Left Arm (" << combatants[test].getWoundLevel(bodyPrt::leftArm) << '\n';
+					std::cout << "6. Chest (" << combatants[test].getWoundLevel(bodyPrt::chest) << '\n';
+					std::cout << "7. Gut (" << combatants[test].getWoundLevel(bodyPrt::gut) << '\n';
+					std::cout << "8. Right Leg (" << combatants[test].getWoundLevel(bodyPrt::rightLeg) << '\n';
+					std::cout << "9. Left Leg (" << combatants[test].getWoundLevel(bodyPrt::leftLeg) << '\n';
+
+					int response2 = getIntInput();
+					while (response2 < 0 || response2 > 9)
+					{
+						std::cout << "Invalid Input" << '\n';
+						response2 = getIntInput();
+					}
+
+					if (response2 == 1)
+					{
+						response2 = 10;
+					}
+
+					std::cout << "Enter amount to heal (will subtract from wound level)" << '\n';
+
+					int response3 = getIntInput();
+					while (response3 > combatants[test].getWoundLevel(static_cast<bodyPrt>(response2 - 2)))
+					{
+						response3 = combatants[test].getWoundLevel(static_cast<bodyPrt>(response2 - 2));
+					}
+
+					if (response3 > 0)
+					{
+						int newLevel = combatants[test].getWoundLevel(static_cast<bodyPrt>(response2 - 2)) - response3;
+						combatants[test].heal(static_cast<bodyPrt>(response2 - 2), newLevel);
+					}
+				}
+				else
+				{
+					std::cout << "Error: could not find combatant: " << args[1] << '\n';
+				}
 			}
 			else
 			{
 				// find combatant matching arg[1], body part = args[2], apply to wound level
+				int test = unsortedLookup(combatants, args[1]);
+				if (test > -1)
+				{
+					bodyPrt bp = bodyPrt::all;
+					bool validbp = true;
+
+					if (args[2] == "all")
+					{
+						bp = bodyPrt::all;
+					}
+					else if (args[2] == "head")
+					{
+						bp = bodyPrt::head;
+					}
+					else if (args[2] == "neck")
+					{
+						bp = bodyPrt::neck;
+					}
+					else if (args[2] == "rightArm")
+					{
+						bp = bodyPrt::rightArm;
+					}
+					else if (args[2] == "leftArm")
+					{
+						bp = bodyPrt::leftArm;
+					}
+					else if (args[2] == "chest")
+					{
+						bp = bodyPrt::chest;
+					}
+					else if (args[2] == "gut")
+					{
+						bp = bodyPrt::gut;
+					}
+					else if (args[2] == "rightLeg")
+					{
+						bp = bodyPrt::rightLeg;
+					}
+					else if (args[2] == "leftLeg")
+					{
+						bp = bodyPrt::leftLeg;
+					}
+					else
+					{
+						std::cout << "Error: Unknown body part" << '\n';
+						validbp = false;
+					}
+
+					if (validbp == true)
+					{
+						int healLevel = 0;
+						if (isInteger(args[3]) == true)
+						{
+							healLevel = std::stoi(args[3]);
+						}
+						else
+						{
+							std::cout << "Enter level to subtract from wound level" << '\n';
+							int response = getIntInput();
+							if (response > combatants[test].getWoundLevel(bp))
+							{
+								healLevel = combatants[test].getWoundLevel(bp);
+							}
+							else
+							{
+								healLevel = response;
+							}
+
+							int newLevel = combatants[test].getWoundLevel(bp) - healLevel;
+							combatants[test].heal(bp, newLevel);
+						}
+					}
+				}
+				else
+				{
+					std::cout << "Error: could not find combatant: " << args[1] << '\n';
+				}
 			}
 		}
 		else if (args[0] == "reload")
 		{
-			if (args.size() < 2)
+			if (args.size() < 2 && combatants.size() > 0)
 			{
 				// display all combatants, get user selection for character, get user selection weapon, reload weapon
+				std::cout << "Choose character to reload:" << '\n';
+				for (int i = 0; i < combatants.size(); i++)
+				{
+					std::cout << i + 1 << ". " << combatants[i].getName() << '\n';
+				}
+				int response = getIntInput();
+				while (response < 1 || response > combatants.size())
+				{
+					std::cout << "Invalid Input" << '\n';
+					response = getIntInput();
+				}
+				int numWeps = 0;
+				std::cout << '\n' << "Choose Weapon to reload:" << '\n';
+				if (combatants[response - 1].w1.getName() != "" && combatants[response - 1].w2.getName() != "" && combatants[response - 1].w3.getName() != ""
+					&& combatants[response - 1].w4.getName() != "" && combatants[response - 1].w5.getName() != "")
+				{
+					std::cout << "1. " << combatants[response - 1].w1.getName() << '\n';
+					std::cout << "2. " << combatants[response - 1].w2.getName() << '\n';
+					std::cout << "3. " << combatants[response - 1].w3.getName() << '\n';
+					std::cout << "4. " << combatants[response - 1].w4.getName() << '\n';
+					std::cout << "5. " << combatants[response - 1].w5.getName() << '\n';
+					numWeps = 5;
+				}
+				else if (combatants[response - 1].w1.getName() != "" && combatants[response - 1].w2.getName() != "" && combatants[response - 1].w3.getName() != ""
+					&& combatants[response - 1].w4.getName() != "")
+				{
+					std::cout << "1. " << combatants[response - 1].w1.getName() << '\n';
+					std::cout << "2. " << combatants[response - 1].w2.getName() << '\n';
+					std::cout << "3. " << combatants[response - 1].w3.getName() << '\n';
+					std::cout << "4. " << combatants[response - 1].w4.getName() << '\n';
+					numWeps = 4;
+				}
+				else if (combatants[response - 1].w1.getName() != "" && combatants[response - 1].w2.getName() != "" && combatants[response - 1].w3.getName() != "")
+				{
+					std::cout << "1. " << combatants[response - 1].w1.getName() << '\n';
+					std::cout << "2. " << combatants[response - 1].w2.getName() << '\n';
+					std::cout << "3. " << combatants[response - 1].w3.getName() << '\n';
+					numWeps = 3;
+				}
+				else if (combatants[response - 1].w1.getName() != "" && combatants[response - 1].w2.getName() != "")
+				{
+					std::cout << "1. " << combatants[response - 1].w1.getName() << '\n';
+					std::cout << "2. " << combatants[response - 1].w2.getName() << '\n';
+					numWeps = 2;
+				}
+				else
+				{
+					std::cout << "1. " << combatants[response - 1].w1.getName() << '\n';
+					numWeps = 1;
+				}
+
+				int response2 = getIntInput();
+				while (response2 < 1 || response2 > numWeps)
+				{
+					std::cout << "Invalid Input" << '\n';
+					response2 = getIntInput();
+				}
+
+				switch (response2)
+				{
+					case 1:
+					{
+						combatants[response - 1].w1.reloadAll();
+						break;
+					}
+					case 2:
+					{
+						combatants[response - 1].w2.reloadAll();
+						break;
+					}
+					case 3:
+					{
+						combatants[response - 1].w3.reloadAll();
+						break;
+					}
+					case 4:
+					{
+						combatants[response - 1].w4.reloadAll();
+						break;
+					}
+					case 5:
+					{
+						combatants[response - 1].w5.reloadAll();
+						break;
+					}
+				}
+			}
+			else if (combatants.size() < 1)
+			{
+				std::cout << "Error: no characters are loaded in current encounter" << '\n';
 			}
 			else if (args.size() < 3)
 			{
 				// find combatant matching arg[1], get user selection for weapon, reload weapon
+				int test = unsortedLookup(combatants, args[1]);
+				if (test > -1)
+				{
+					int numWeps = 0;
+					std::cout << '\n' << "Choose Weapon to reload:" << '\n';
+					if (combatants[test].w1.getName() != "" && combatants[test].w2.getName() != "" && combatants[test].w3.getName() != ""
+						&& combatants[test].w4.getName() != "" && combatants[test].w5.getName() != "")
+					{
+						std::cout << "1. " << combatants[test].w1.getName() << '\n';
+						std::cout << "2. " << combatants[test].w2.getName() << '\n';
+						std::cout << "3. " << combatants[test].w3.getName() << '\n';
+						std::cout << "4. " << combatants[test].w4.getName() << '\n';
+						std::cout << "5. " << combatants[test].w5.getName() << '\n';
+						numWeps = 5;
+					}
+					else if (combatants[test].w1.getName() != "" && combatants[test].w2.getName() != "" && combatants[test].w3.getName() != ""
+						&& combatants[test].w4.getName() != "")
+					{
+						std::cout << "1. " << combatants[test].w1.getName() << '\n';
+						std::cout << "2. " << combatants[test].w2.getName() << '\n';
+						std::cout << "3. " << combatants[test].w3.getName() << '\n';
+						std::cout << "4. " << combatants[test].w4.getName() << '\n';
+						numWeps = 4;
+					}
+					else if (combatants[test].w1.getName() != "" && combatants[test].w2.getName() != "" && combatants[test].w3.getName() != "")
+					{
+						std::cout << "1. " << combatants[test].w1.getName() << '\n';
+						std::cout << "2. " << combatants[test].w2.getName() << '\n';
+						std::cout << "3. " << combatants[test].w3.getName() << '\n';
+						numWeps = 3;
+					}
+					else if (combatants[test].w1.getName() != "" && combatants[test].w2.getName() != "")
+					{
+						std::cout << "1. " << combatants[test].w1.getName() << '\n';
+						std::cout << "2. " << combatants[test].w2.getName() << '\n';
+						numWeps = 2;
+					}
+					else
+					{
+						std::cout << "1. " << combatants[test].w1.getName() << '\n';
+						numWeps = 1;
+					}
+
+					int response2 = getIntInput();
+					while (response2 < 1 || response2 > numWeps)
+					{
+						std::cout << "Invalid Input" << '\n';
+						response2 = getIntInput();
+					}
+
+					switch (response2)
+					{
+					case 1:
+					{
+						combatants[test].w1.reloadAll();
+						break;
+					}
+					case 2:
+					{
+						combatants[test].w2.reloadAll();
+						break;
+					}
+					case 3:
+					{
+						combatants[test].w3.reloadAll();
+						break;
+					}
+					case 4:
+					{
+						combatants[test].w4.reloadAll();
+						break;
+					}
+					case 5:
+					{
+						combatants[test].w5.reloadAll();
+						break;
+					}
+					}
+				}
+				else
+				{
+					std::cout << "Error: combatant not found" << '\n';
+				}
 			}
 			else
 			{
 				// find combatant matching arg[1], find weapon matching args[2], reload weapon
+				int test = unsortedLookup(combatants, args[1]);
+				if (test > -1)
+				{
+					if (args[1] == combatants[test].w1.getName())
+					{
+						combatants[test].w1.reloadAll();
+					}
+					else if (args[1] == combatants[test].w2.getName())
+					{
+						combatants[test].w2.reloadAll();
+					}
+					else if (args[1] == combatants[test].w3.getName())
+					{
+						combatants[test].w3.reloadAll();
+					}
+					else if (args[1] == combatants[test].w4.getName())
+					{
+						combatants[test].w4.reloadAll();
+					}
+					else if (args[1] == combatants[test].w5.getName())
+					{
+						combatants[test].w5.reloadAll();
+					}
+					else
+					{
+						std::cout << "Error: Weapon not found" << '\n';
+					}
+				}
+				else
+				{
+					std::cout << "Error: combatant not found" << '\n';
+				}
 			}
 		}
 		else// first arg not recognized
@@ -905,6 +1687,8 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 			std::cout << "Error: Unrecognized Command: '" <<  args[0] << "'" << '\n';
 		}
 	}
+
+	std::cout << '\n';
 
 	return escapeCode;
 }
@@ -1799,6 +2583,11 @@ int combatEncounter(std::vector<std::string>& args, std::vector<Character>& play
 					while (args[0] == "encounter")
 					{
 						std::cout << "Cannot access encounter commands while in combat" << '\n';
+						getCommandInput(args);
+					}
+					while (args[0] == "combat")
+					{
+						std::cout << "Cannot initiate new combat while combat is in progress ('endcombat' to end current combat)" << '\n';
 						getCommandInput(args);
 					}
 					if (args.size() < 2)

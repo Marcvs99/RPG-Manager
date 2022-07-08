@@ -24,6 +24,7 @@ public:
 	void writeToEncounterFile(std::string encounter);
 
 	int getWoundLevel();
+	int getWoundLevel(bodyPrt bp);
 	int getResistance(damageType dt);
 	int getSkillLevel(skill s);
 	int getTrueSkillLevel(skill s);
