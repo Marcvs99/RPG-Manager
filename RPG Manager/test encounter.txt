@@ -1,4 +1,0 @@
-test
-0
-new npc
-2

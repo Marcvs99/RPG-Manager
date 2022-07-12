@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int ap, weaponID weapon1, weaponID weapon2, weaponID weapon3)
+Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int per, int ap, weaponID weapon1, weaponID weapon2, weaponID weapon3)
 {
 	woundLevel = 0;
 	bluntResistance = bR;
@@ -23,6 +23,7 @@ Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, i
 	acrobatics = acr;
 	constitution = c;
 	evasion = ev;
+	perception_Investigation = per;
 	armorPenalty = ap;
 	name = n;
 	acted = false;
@@ -31,7 +32,7 @@ Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, i
 	w3.setWeapon(weapon3);
 }
 
-Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int ap)
+Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int per, int ap)
 {
 	woundLevel = 0;
 	bluntResistance = bR;
@@ -54,6 +55,7 @@ Character::Character(std::string n, int bR, int cR, int pR, int chR, int balR, i
 	acrobatics = acr;
 	constitution = c;
 	evasion = ev;
+	perception_Investigation = per;
 	armorPenalty = ap;
 	name = n;
 	acted = false;
@@ -1377,6 +1379,7 @@ void Character::writeToFileNPC()
 	npcFile << acrobatics << '\n';
 	npcFile << constitution << '\n';
 	npcFile << evasion << '\n';
+	npcFile << perception_Investigation << '\n';
 	npcFile << armorPenalty << '\n';
 
 	npcFile.close();
@@ -2390,8 +2393,9 @@ void Character::replenishAction()
 
 void Character::rollInitiative()
 {
-	std::cout << name << " rolls initiative:" << '\n';
-	initiativeRoll = diceRoll(getSkillLevel(skill::S_initiative));
+	std::cout << name << " rolls initiative: ";
+	initiativeRoll = diceRoll((getSkillLevel(skill::S_initiative) * 100));
+	std::cout << initiativeRoll / 100 << " (" << initiativeRoll << ")" << '\n';
 }
 
 int Character::getInitiative()

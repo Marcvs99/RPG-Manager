@@ -1,19 +1,9 @@
-// Marcus King
-// 5/5/2022
-// CIS 1202.501
 
-// Description: This is a program that is meant to assist calculations and recordkeeping for roleplaying games.
-// Right now it is set up to demonstrate some of the capabilities with an example combat scenario between two npcs (non player characters)
-
-// To use follow the promts to customize your character, than select a weapon to use, and finally which opponent to face.
-
-// The program will generate a simulated battle, logging each hit and miss, along with damage dealt until there is a winner.
 
 
 #include <iostream>             // files
 #include <string>
 #include <fstream>
-
 #include "Enums.h"
 #include "Character.h"
 
@@ -166,18 +156,18 @@ int main()																					//main
 	// create function to alter resistances
 	// implement combat function that calls attack method, asks for target, processes attack or evade check, applies damage appropriately 
 	// implement function to choose combatants and load them into a single character vector
+	// implement combat encounter function: get characters to include, roll initiative, order characters from lowest to highest initiative,
+	//			get and dispaly actions for each character (as well as remaining actions, ammo, and wound level), reverse order, allow user to access actions 
+	//			for each character in order and end turn. Allow user to remove characters after taking damage. Repeat until user terminates encounter
+	// Implement Command interface
+	// add perception/investigation to npc creation
+	// implement ability to save and encounters
 
 	//to do:
 
 	// add even more weapons
-	// implement combat encounter function: get characters to include, roll initiative, order characters from lowest to highest initiative,
-	//			get and dispaly actions for each character (as well as remaining actions, ammo, and wound level), reverse order, allow user to access actions 
-	//			for each character in order and end turn. Allow user to remove characters after taking damage. Repeat until user terminates encounter
 	// implement ability to save and delete text events, display them as list (Title only), choose from list or draw randomly
 	// allow user to add new event decks (new files)
-	// implement ability to save and load combat encounters
-	// Implement Command interface
-	// add perception/investigation to npc creation
 
 	std::cout << "Save character changes?" << '\n';
 
@@ -354,7 +344,15 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				}
 				else if (args[1] == "delete")
 				{
-					deleteArmorType(armor);
+					if (armor.size() > 1)
+					{
+						deleteArmorType(armor);
+					}
+					else
+					{
+						std::cout << "Error: Cannot delete last armor from file" << '\n';
+					}
+					
 				}
 				else if (args[1] == "display")
 				{
@@ -396,10 +394,19 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				if (args[1] == "new")
 				{
 					createNewWeaponType();
+					loadWeaponVector(weapons);
 				}
 				else if (args[1] == "delete")
 				{
-					deleteWeapon(weapons);
+					if (weapons.size() > 1)
+					{
+						deleteWeapon(weapons);
+					}
+					else
+					{
+						std::cout << "Error: cannot delete last weapon from file" << '\n';
+					}
+					
 				}
 				else if (args[1] == "display")
 				{
@@ -444,8 +451,16 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				}
 				else if (args[1] == "delete")
 				{
-					removeNPCType(NPCs);
-					loadNPCvector(NPCs);
+					if (NPCs.size() > 1)
+					{
+						removeNPCType(NPCs);
+						loadNPCvector(NPCs);
+					}
+					else
+					{
+						std::cout << "Error: Cannot delete last npc from file" << '\n';
+					}
+					
 				}
 				else if (args[1] == "display")
 				{
@@ -490,8 +505,15 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				}
 				else if (args[1] == "delete")
 				{
-					deleteCharacter(playerCharacters);
-					loadCharacterVector(playerCharacters);
+					if (playerCharacters.size() > 1)
+					{
+						deleteCharacter(playerCharacters);
+						loadCharacterVector(playerCharacters);
+					}
+					else
+					{
+						std::cout << "Error: Cannot delete last character from file" << '\n';
+					}
 				}
 				else if (args[1] == "display")
 				{
@@ -537,7 +559,15 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				else if (args[1] == "delete")
 				{
 					// display encounters and remove user selection, then rewrite to file
-					deleteEncounter(encounters);
+					if (encounters.size() > 1)
+					{
+						deleteEncounter(encounters);
+					}
+					else
+					{
+						std::cout << "Error: Cannot delete last character from file" << '\n';
+					}
+					
 				}
 				else if (args[1] == "display")
 				{
@@ -1200,7 +1230,12 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				std::cout << "Select attacker:" << '\n';
 				for (int i = 0; i < combatants.size(); i++)
 				{
-					std::cout << i << ". " << combatants[i].getName() << '\n';
+					std::cout << i << ". " << combatants[i].getName();
+					if (combatants[i].getAlive() == false)
+					{
+						std::cout << " (KNOCKED OUT)";
+					}
+					std::cout << '\n';
 				}
 				int response = getIntInput();
 				while (response < 0 || response > combatants.size())
@@ -1213,7 +1248,12 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				std::cout << "Select defender:" << '\n';
 				for (int i = 0; i < combatants.size(); i++)
 				{
-					std::cout << i << ". " << combatants[i].getName() << '\n';
+					std::cout << i << ". " << combatants[i].getName();
+					if (combatants[i].getAlive() == false)
+					{
+						std::cout << " (KNOCKED OUT)";
+					}
+					std::cout << '\n';
 				}
 				response = getIntInput();
 				while (response < 0 || response > combatants.size())
@@ -1237,7 +1277,12 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 					std::cout << "Select defender:" << '\n';
 					for (int i = 0; i < combatants.size(); i++)
 					{
-						std::cout << i << ". " << combatants[i].getName() << '\n';
+						std::cout << i << ". " << combatants[i].getName();
+						if (combatants[i].getAlive() == false)
+						{
+							std::cout << " (KNOCKED OUT)";
+						}
+						std::cout << '\n';
 					}
 					int response = getIntInput();
 					while (response < 0 || response > combatants.size() - 1)
@@ -1280,7 +1325,7 @@ int executeCommand(std::vector<std::string>& args, std::vector<Character>& playe
 				std::cout << "select combatant to heal:" << '\n';
 				for (int i = 0; i < combatants.size(); i++)
 				{
-					std::cout << i + 1 << ". " << combatants[i].getName() << '\n';
+					std::cout << i + 1 << ". " << combatants[i].getName() << " WL: " << combatants[i].getWoundLevel() << '\n';
 				}
 
 				int response = getIntInput();
@@ -2029,6 +2074,7 @@ void deleteEncounter(std::vector<std::string>& encounters)
 		}
 		outFile.close();
 	}
+	loadEncounters(encounters);
 }
 
 void newEncounter(std::vector<Character>& playerCharacters, std::vector<Character>& NPCs, std::vector<Character>& combatants, std::vector<std::string>& encounters)
@@ -2481,11 +2527,25 @@ int combatEncounter(std::vector<std::string>& args, std::vector<Character>& play
 	
 	while (escapeCode < 2)
 	{
+		std::cout << '\n';
 		for (int i = 0; i < combatants.size(); i++)
 		{
-			combatants[i].replenishAction();
-			std::cout << '\n';
-			combatants[i].rollInitiative();
+			if (combatants[i].getAlive() == true)
+			{
+				combatants[i].replenishAction();
+				combatants[i].rollInitiative();
+				if (i > 0)
+				{
+					for (int j = i - 1; j >= 0; j--)
+					{
+						while (combatants[i].getInitiative() == combatants[j].getInitiative())
+						{
+							combatants[i].rollInitiative();
+							j = i - 1;
+						}
+					}
+				}
+			}
 		}
 
 		int i, j, min_idx;
@@ -2572,7 +2632,7 @@ int combatEncounter(std::vector<std::string>& args, std::vector<Character>& play
 					}
 					else
 					{
-						std::cout << combatants[i].getName() << " has NOT acted this round" << '\n';
+						std::cout << combatants[i].getName() << " HAS NOT acted this round" << '\n';
 					}
 					std::cout << combatants[i].getName() << " declared action(s): " << combatants[i].getAction() << '\n';
 					std::cout << '\n';
@@ -4357,7 +4417,7 @@ void loadNPCvector(std::vector<Character>& NPCvector)
 	std::string temp = "";
 	int bluntResistance = 0, cutResistance = 0, pierceResistance = 0, choppResistance = 0, ballisticResistance = 0, environmentalResistance = 0, flameResistance = 0,
 		energyResistance = 0, shockResistance = 0, acidResistance = 0, magicalResistance = 0, grapple = 0, melee = 0, strengthRanged = 0, dexRanged = 0, initiative = 0,
-		athletics = 0, acrobatics = 0, constitution = 0, evasion = 0, armorPenalty = 0, points = 0;
+		athletics = 0, acrobatics = 0, constitution = 0, evasion = 0, perception = 0, armorPenalty = 0, points = 0;
 
 	std::string weaponName = "";
 	int maxLoaded = 1;
@@ -4441,10 +4501,13 @@ void loadNPCvector(std::vector<Character>& NPCvector)
 		evasion = std::stoi(temp);
 
 		std::getline(inputFile, temp, '\n');
+		perception = std::stoi(temp);
+
+		std::getline(inputFile, temp, '\n');
 		armorPenalty = std::stoi(temp);
 
 		Character c(name, bluntResistance, cutResistance, pierceResistance, choppResistance, ballisticResistance, environmentalResistance, flameResistance, energyResistance,
-			shockResistance, acidResistance, magicalResistance, grapple, melee, strengthRanged, dexRanged, initiative, athletics, acrobatics, constitution, evasion, armorPenalty);
+			shockResistance, acidResistance, magicalResistance, grapple, melee, strengthRanged, dexRanged, initiative, athletics, acrobatics, constitution, evasion, perception, armorPenalty);
 
 		for (int i = 0; i < 3; i++)
 		{
@@ -4550,7 +4613,7 @@ void newNPCType(std::vector<Weapon>& weapons)
 	std::string name = "";
 	int bluntResistance = 0, cutResistance = 0, pierceResistance = 0, choppResistance = 0, ballisticResistance = 0, environmentalResistance = 0, flameResistance = 0,
 		energyResistance = 0, shockResistance = 0, acidResistance = 0, magicalResistance = 0, grapple = 4, melee = 4, strengthRanged = 4, dexRanged = 4, initiative = 4, 
-		athletics = 4, acrobatics = 4, constitution = 4, evasion = 4, armorPenalty = 4, points = 0;
+		athletics = 4, acrobatics = 4, constitution = 4, evasion = 4, perception = 4, armorPenalty = 0, points = 0;
 	
 	Weapon w1, w2, w3, temp;
 
@@ -4566,7 +4629,7 @@ void newNPCType(std::vector<Weapon>& weapons)
 
 	int selection = 0;
 
-	while (selection != 11)																											
+	while (selection != 12)																											
 	{
 		std::cout << "Skill Points used: " << points << '\n' << '\n';
 		std::cout << "1. grapple: " << grapple << '\n';
@@ -4578,13 +4641,14 @@ void newNPCType(std::vector<Weapon>& weapons)
 		std::cout << "7. acrobatics: " << acrobatics << '\n';
 		std::cout << "8. constitution: " << constitution << '\n';
 		std::cout << "9. evasion: " << evasion << '\n';
-		std::cout << "10. Reset Points: " << '\n';
-		std::cout << "11. Exit & Save: " << '\n';
+		std::cout << "10. Perception/Investigation " << perception << '\n';
+		std::cout << "11. Reset Points: " << '\n';
+		std::cout << "12. Exit & Save: " << '\n';
 		
 
 		selection = getIntInput();
 
-		while (!std::cin.good() || selection < 1 || selection > 11)
+		while (!std::cin.good() || selection < 1 || selection > 12)
 		{
 			std::cout << "Invalid input. Please try again" << '\n';
 			std::cin.ignore(INT_MAX, '\n');
@@ -4648,6 +4712,12 @@ void newNPCType(std::vector<Weapon>& weapons)
 			break;
 		}
 		case 10:
+		{
+			perception++;
+			points++;
+			break;
+		}
+		case 11:
 		{
 			grapple = 0, melee = 0, strengthRanged = 0, dexRanged = 0, initiative = 0, athletics = 0, acrobatics = 0, constitution = 0, evasion = 0, armorPenalty = 0, points = -40;
 			break;
@@ -4754,6 +4824,9 @@ void newNPCType(std::vector<Weapon>& weapons)
 		}
 	}
 
+	std::cout << "Enter Armor Penalty:" << '\n';
+	armorPenalty = getIntInput();
+
 	for (int i = 0; i < 3; i++)
 	{
 		switch (i)
@@ -4836,7 +4909,7 @@ void newNPCType(std::vector<Weapon>& weapons)
 
 
 	Character NPCType(name, bluntResistance, cutResistance, pierceResistance, choppResistance, ballisticResistance, environmentalResistance, flameResistance, energyResistance,
-		shockResistance, acidResistance, magicalResistance, grapple, melee, strengthRanged, dexRanged, initiative, athletics, acrobatics, constitution, evasion, armorPenalty);
+		shockResistance, acidResistance, magicalResistance, grapple, melee, strengthRanged, dexRanged, initiative, athletics, acrobatics, constitution, evasion, perception, armorPenalty);
 
 	NPCType.w1 = w1;
 	NPCType.w2 = w2;

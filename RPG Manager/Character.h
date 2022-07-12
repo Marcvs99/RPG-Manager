@@ -7,8 +7,8 @@ class Character :
     public Weapon
 {
 public:
-	Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int ap, weaponID weapon1, weaponID weapon2, weaponID weapon3);
-	Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int ap);
+	Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int per, int ap, weaponID weapon1, weaponID weapon2, weaponID weapon3);
+	Character(std::string n, int bR, int cR, int pR, int chR, int balR, int envR, int flR, int enR, int shR, int acR, int maR, int grp, int m, int strR, int dexR, int i, int ath, int acr, int c, int ev, int per, int ap);
 	Character();
 	Weapon w1;
 	Weapon w2;
@@ -16,6 +16,7 @@ public:
 	Weapon w4;
 	Weapon w5;
 	std::string getChName();
+	int initiativeRoll = 0;
 	void setID(std::string n);
 	void setName(std::string n);
 	void setVocation(int num, std::string voc);
@@ -79,7 +80,7 @@ private:
 
 	bool acted = false;
 	bool isNPC = false;
-	int initiativeRoll = 0;
+	
 	bool alive = true;
 
 	int defaultLevel = 4;

@@ -1,0 +1,4 @@
+Conan
+0
+NPC Pirate
+1
